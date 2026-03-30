@@ -95,23 +95,31 @@ function App() {
   </>
 )}
 
-      {/* ЭКРАН 2: ВЫБОР КУРСА */}
-      {selectedFaculty && !selectedCourse && (
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <button onClick={() => setSelectedFaculty(null)} style={backBtnStyle}>⬅ Назад</button>
-          <div style={{ backgroundColor: '#fff', padding: '40px', borderRadius: '30px', border: '1px solid #e0f2f1' }}>
-            <h2 style={{ fontWeight: '900', color: '#004d40', fontSize: '28px' }}>{selectedFaculty.name}</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginTop: '20px' }}>
-              {[1, 2, 3, 4, 5, 6].map(num => (
-                <button key={num} onClick={() => { setSelectedCourse(num); loadSubjects(selectedFaculty.id, num); }} 
-                  style={{ padding: '30px 20px', borderRadius: '20px', border: '3px solid #b2dfdb', background: '#fff', cursor: 'pointer', fontSize: '24px', fontWeight: '900', color: '#00796b' }}>
-                  {num} курс
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+    {/* ЭКРАН 2: ВЫБОР КУРСА */}
+{selectedFaculty && !selectedCourse && (
+  <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+    <button onClick={() => setSelectedFaculty(null)} style={backBtnStyle}>⬅ Назад</button>
+    <div style={{ backgroundColor: '#fff', padding: '40px', borderRadius: '30px', border: '1px solid #e0f2f1' }}>
+      <h2 style={{ fontWeight: '900', color: '#004d40', fontSize: '28px' }}>{selectedFaculty.name}</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginTop: '20px' }}>
+        {[1, 2, 3, 4, 5, 6].map(num => {
+          // ЕСЛИ номер курса 6 И выбран факультет стоматологии (ID 3), то НЕ РИСУЕМ кнопку
+          if (num === 6 && selectedFaculty.id === 3) return null;
+
+          return (
+            <button 
+              key={num} 
+              onClick={() => { setSelectedCourse(num); loadSubjects(selectedFaculty.id, num); }} 
+              style={{ padding: '30px 20px', borderRadius: '20px', border: '3px solid #b2dfdb', background: '#fff', cursor: 'pointer', fontSize: '24px', fontWeight: '900', color: '#00796b' }}
+            >
+              {num} курс
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+)}
 
       {/* ЭКРАН 3: ПРЕДМЕТЫ И КНИГИ */}
       {selectedCourse && (
