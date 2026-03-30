@@ -12,15 +12,15 @@ function App() {
 
   // 2. ЗАГРУЗКА ДАННЫХ С СЕРВЕРА
   useEffect(() => {
-    axios.get('https://medhelper-production.up.railway.app/faculties').then(res => setFaculties(res.data))
+    axios.get('http://localhost:5000/faculties').then(res => setFaculties(res.data))
   }, [])
 
   const loadSubjects = (fId, cId) => {
-    axios.get(`https://medhelper-production.up.railway.app/subjects/${fId}/${cId}`).then(res => setSubjects(res.data))
+    axios.get(`http://localhost:5000/subjects/${fId}/${cId}`).then(res => setSubjects(res.data))
   }
 
   const loadBooks = (sId) => {
-    axios.get(`https://medhelper-production.up.railway.app/books/${sId}`).then(res => setBooks(res.data))
+    axios.get(`http://localhost:5000/books/${sId}`).then(res => setBooks(res.data))
   }
 
   // 3. СТИЛИ (Дизайн)
@@ -68,7 +68,8 @@ function App() {
     marginBottom: '20px'
   }
 
-return (
+  // 4. ОТОБРАЖЕНИЕ (Интерфейс)
+  return (
     <div style={appStyle}>
       <h1 style={{ color: '#00695c', fontSize: '36px', fontWeight: '900' }}> MedHelper</h1>
 
@@ -90,15 +91,6 @@ return (
           </div>
         </>
       )}
-      
-    {/* 2. Затем выводим текст автора снизу */}
-    <div style={{ backgroundColor: '#fff', padding: '30px', borderRadius: '20px', maxWidth: '700px', margin: '0 auto', border: '1px solid #e0f2f1' }}>
-      <p style={{ fontSize: '18px', fontWeight: '600', color: '#444', textAlign: 'center' }}>
-        "Я анонимный автор решил помочь студентам медикам с быстрым поиском информации для ваших пар. Я надеюсь на хорошее сотрудничество с вами."
-      </p>
-    </div>
-  </>
-)}
 
       {/* ЭКРАН 2: ВЫБОР КУРСА */}
       {selectedFaculty && !selectedCourse && (
