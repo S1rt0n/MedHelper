@@ -12,15 +12,15 @@ function App() {
 
   // 2. ЗАГРУЗКА ДАННЫХ С СЕРВЕРА
   useEffect(() => {
-    axios.get('http://localhost:5000/faculties').then(res => setFaculties(res.data))
+    axios.get('https://medhelper-production.up.railway.app/faculties').then(res => setFaculties(res.data))
   }, [])
 
   const loadSubjects = (fId, cId) => {
-    axios.get(`http://localhost:5000/subjects/${fId}/${cId}`).then(res => setSubjects(res.data))
+    axios.get(`https://medhelper-production.up.railway.app/subjects/${fId}/${cId}`).then(res => setSubjects(res.data))
   }
 
   const loadBooks = (sId) => {
-    axios.get(`http://localhost:5000/books/${sId}`).then(res => setBooks(res.data))
+    axios.get(`https://medhelper-production.up.railway.app/books/${sId}`).then(res => setBooks(res.data))
   }
 
   // 3. СТИЛИ (Дизайн)
