@@ -87,8 +87,8 @@ function App() {
     </div>
 
     {/* 2. Затем выводим текст автора снизу */}
-    <div style={{ backgroundColor: '#fff', padding: '30px', borderRadius: '20px', maxWidth: '700px', margin: '0 auto', border: '1px solid #e0f2f1' }}>
-      <p style={{ fontSize: '18px', fontWeight: '600', color: '#444', textAlign: 'center' }}>
+    <div style={{ marginTop: '40px', backgroundColor: '#fff', padding: '20px', borderRadius: '20px', maxWidth: '700px', margin: '40px auto 0 auto', border: '1px solid #e0f2f1' }}>
+      <p style={{ fontSize: '16px', fontWeight: '600', color: '#666', textAlign: 'center', fontStyle: 'italic' }}>
         "Я анонимный автор решил помочь студентам медикам с быстрым поиском информации для ваших пар. Я надеюсь на хорошее сотрудничество с вами."
       </p>
     </div>
