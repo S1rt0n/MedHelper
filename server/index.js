@@ -1,33 +1,34 @@
 const express = require('express');
 const { Pool } = require('pg');
-const cors = require('cors'); // Добавить это
+const cors = require('cors');
+
 const app = express();
-const PORT = 5000;
+// Railway сам выдает порт через переменную PORT, используем её
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(express.json());
 
-// Настройки подключения к твоей базе
+// Настройки подключения для Railway
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'med_db',
-  password: '17052006', // <-- ВПИШИ СВОЙ ПАРОЛЬ ЗДЕСЬ
-  port: 5432,
-});
-
-// Новый маршрут, который отдает список факультетов
-app.get('/faculties', async (req, res) => {
-  try {
-    // Сервер делает запрос в базу
-    const result = await pool.query('SELECT * FROM faculties');
-    // И отправляет результат в браузер
-    res.json(result.rows); 
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Ошибка при работе с базой данных');
+  connectionString: process.env.DATABASE_URL, // Берем из переменных Railway
+  ssl: {
+    rejectUnauthorized: false // Обязательно для облачных баз
   }
 });
 
+// Маршрут для факультетов
+app.get('/faculties', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM faculties');
+    res.json(result.rows); 
+  } catch (err) {
+    console.error('Ошибка БД:', err);
+    res.status(500).json({ error: 'Ошибка при работе с базой данных' });
+  }
+});
+
+// Маршрут для предметов
 app.get('/subjects/:facultyId/:courseId', async (req, res) => {
   const { facultyId, courseId } = req.params;
   try {
@@ -37,11 +38,16 @@ app.get('/subjects/:facultyId/:courseId', async (req, res) => {
     );
     res.json(result.rows);
   } catch (err) {
-    res.status(500).send('Ошибка сервера');
+    console.error('Ошибка БД:', err);
+    res.status(500).json({ error: 'Ошибка сервера' });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Сервер запущен на http://localhost:${PORT}`);
+// Маршрут для проверки связи
+app.get('/health', (req, res) => {
+  res.send('Сервер работает!');
 });
 
+app.listen(PORT, () => {
+  console.log(`Сервер запущен на порту ${PORT}`);
+});
