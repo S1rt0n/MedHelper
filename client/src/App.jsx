@@ -70,30 +70,38 @@ function App() {
 
   // 4. ОТОБРАЖЕНИЕ (Интерфейс)
   return (
-    <div style={appStyle}>
-      <h1 style={{ color: '#00695c', fontSize: '36px', fontWeight: '900' }}>命 MedHelper</h1>
+  <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', padding: '20px' }}>
+    
+    {/* ОСНОВНОЙ КОНТЕНТ (Факультеты, курсы и т.д.) */}
+    <div style={{ flex: 1 }}>
+      {!selectedFaculty && (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', marginBottom: '40px' }}>
+          {faculties.map(f => (
+            <button key={f.id} onClick={() => setSelectedFaculty(f)} 
+              style={{ padding: '18px 30px', fontSize: '18px', fontWeight: '900', cursor: 'pointer', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #4db6ac 0%, #009688 100%)', color: 'white' }}>
+              {f.name}
+            </button>
+          ))}
+        </div>
+      )}
 
-   {/* ЭКРАН 1: ПРИВЕТСТВИЕ И ФАКУЛЬТЕТЫ */}
-{!selectedFaculty && (
-  <>
-    {/* 1. Сначала выводим кнопки факультетов */}
-    <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', marginBottom: '40px' }}>
-      {faculties.map(f => (
-        <button key={f.id} onClick={() => setSelectedFaculty(f)} 
-          style={{ padding: '18px 30px', fontSize: '18px', fontWeight: '900', cursor: 'pointer', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #4db6ac 0%, #009688 100%)', color: 'white' }}>
-          {f.name}
-        </button>
-      ))}
+      {/* Тут твой код для выбора курса и предметов, если факультет выбран */}
+      {selectedFaculty && (
+        <div>
+          {/* Твой текущий код для второго экрана... */}
+        </div>
+      )}
     </div>
 
-    {/* 2. Затем выводим текст автора снизу */}
+    {/* ФУТЕР (Текст автора всегда в самом низу) */}
     <div style={{ marginTop: '40px', backgroundColor: '#fff', padding: '20px', borderRadius: '20px', maxWidth: '700px', margin: '40px auto 0 auto', border: '1px solid #e0f2f1' }}>
       <p style={{ fontSize: '16px', fontWeight: '600', color: '#666', textAlign: 'center', fontStyle: 'italic' }}>
         "Я анонимный автор решил помочь студентам медикам с быстрым поиском информации для ваших пар. Я надеюсь на хорошее сотрудничество с вами."
       </p>
     </div>
-  </>
-)}
+
+  </div>
+);
 
       {/* ЭКРАН 2: ВЫБОР КУРСА */}
       {selectedFaculty && !selectedCourse && (
