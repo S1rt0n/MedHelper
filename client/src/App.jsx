@@ -32,29 +32,32 @@ function App() {
     minHeight: '100vh'
   }
 
-  const subjectsGridStyle = {
+ const subjectsGridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', 
-    gap: '20px',
-    marginTop: '30px',
-    width: '100%'
+    // 'auto-fill' лучше для мобилок, а 280px позволит кнопкам быть шире
+    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
+    gap: '15px',
+    marginTop: '20px',
+    width: '100%',
+    boxSizing: 'border-box' // Важно, чтобы паддинги не раздували ширину
   }
 
   const subjectCardStyle = {
-    padding: '20px 25px',
+    padding: '15px 20px',
     background: '#fff',
-    borderLeft: '8px solid #009688',
-    borderRadius: '16px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+    borderLeft: '6px solid #009688',
+    borderRadius: '12px',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
     textAlign: 'left',
-    fontSize: '19px',
-    fontWeight: '900', // Жирный шрифт
+    fontSize: '16px', // Чуть меньше шрифт для мобильных
+    fontWeight: '700', 
     color: '#1a1a1a',
     display: 'flex',
     alignItems: 'center',
-    gap: '15px',
+    gap: '12px',
     cursor: 'pointer',
-    transition: 'all 0.2s ease-in-out'
+    transition: 'all 0.2s ease-in-out',
+    wordBreak: 'break-word' // Чтобы длинные названия не ломали верстку
   }
 
   const backBtnStyle = {
