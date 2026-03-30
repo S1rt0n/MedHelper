@@ -17,6 +17,10 @@ const pool = new Pool({
   }
 });
 
+app.get('/', (req, res) => {
+  res.send('<h1>Добро пожаловать в MedHelper!</h1><p>Сервер запущен и готов отдавать данные.</p>');
+});
+
 // Маршрут для факультетов
 app.get('/faculties', async (req, res) => {
   try {
