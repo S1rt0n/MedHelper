@@ -69,7 +69,7 @@ function App() {
   }
 
   // 4. ОТОБРАЖЕНИЕ (Интерфейс)
-  return (
+   return (
     <div style={appStyle}>
       <h1 style={{ color: '#00695c', fontSize: '36px', fontWeight: '900' }}>命 MedHelper</h1>
 
@@ -91,7 +91,7 @@ function App() {
           </div>
         </>
       )}
-
+      
       {/* ЭКРАН 2: ВЫБОР КУРСА */}
       {selectedFaculty && !selectedCourse && (
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
