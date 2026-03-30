@@ -12,15 +12,15 @@ function App() {
 
   // 2. ЗАГРУЗКА ДАННЫХ С СЕРВЕРА
   useEffect(() => {
-    axios.get('http://localhost:5000/faculties').then(res => setFaculties(res.data))
+    axios.get('https://medhelper-production.up.railway.app/faculties').then(res => setFaculties(res.data))
   }, [])
 
   const loadSubjects = (fId, cId) => {
-    axios.get(`http://localhost:5000/subjects/${fId}/${cId}`).then(res => setSubjects(res.data))
+    axios.get(`https://medhelper-production.up.railway.app/subjects/${fId}/${cId}`).then(res => setSubjects(res.data))
   }
 
   const loadBooks = (sId) => {
-    axios.get(`http://localhost:5000/books/${sId}`).then(res => setBooks(res.data))
+    axios.get(`https://medhelper-production.up.railway.app/books/${sId}`).then(res => setBooks(res.data))
   }
 
   // 3. СТИЛИ (Дизайн)
@@ -69,11 +69,11 @@ function App() {
   }
 
   // 4. ОТОБРАЖЕНИЕ (Интерфейс)
-   return (
+  return (
     <div style={appStyle}>
       <h1 style={{ color: '#00695c', fontSize: '36px', fontWeight: '900' }}>命 MedHelper</h1>
 
-     {/* ЭКРАН 1: ПРИВЕТСТВИЕ И ФАКУЛЬТЕТЫ */}
+   {/* ЭКРАН 1: ПРИВЕТСТВИЕ И ФАКУЛЬТЕТЫ */}
 {!selectedFaculty && (
   <>
     {/* 1. Сначала выводим кнопки факультетов */}
@@ -94,7 +94,7 @@ function App() {
     </div>
   </>
 )}
-      
+
       {/* ЭКРАН 2: ВЫБОР КУРСА */}
       {selectedFaculty && !selectedCourse && (
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
