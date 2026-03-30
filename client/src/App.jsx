@@ -71,7 +71,7 @@ function App() {
   // 4. ОТОБРАЖЕНИЕ (Интерфейс)
   return (
     <div style={appStyle}>
-      <h1 style={{ color: '#00695c', fontSize: '36px', fontWeight: '900',minHeight: '100vh' }}> MedHelper</h1>
+      <h1 style={{ color: '#00695c', fontSize: '36px', fontWeight: '900',minHeight: '100vh', display: 'flex', flexDirection: 'column', padding: '20px' }}> MedHelper</h1>
 
     {/* ЭКРАН 1: ПРИВЕТСТВИЕ И ФАКУЛЬТЕТЫ */}
       {!selectedFaculty && (
