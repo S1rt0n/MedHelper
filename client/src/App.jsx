@@ -98,22 +98,46 @@ function App() {
   </>
 )}
 
-    {/* ЭКРАН 2: ВЫБОР КУРСА */}
+   {/* ЭКРАН 2: ВЫБОР КУРСА */}
 {selectedFaculty && !selectedCourse && (
-  <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+  <div style={{ maxWidth: '900px', margin: '0 auto', padding: '10px' }}> {/* Добавил паддинг для краев */}
     <button onClick={() => setSelectedFaculty(null)} style={backBtnStyle}>⬅ Назад</button>
-    <div style={{ backgroundColor: '#fff', padding: '40px', borderRadius: '30px', border: '1px solid #e0f2f1' }}>
-      <h2 style={{ fontWeight: '900', color: '#004d40', fontSize: '28px' }}>{selectedFaculty.name}</h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginTop: '20px' }}>
+    <div style={{ 
+      backgroundColor: '#fff', 
+      padding: '20px', // Уменьшил паддинг с 40 до 20 для мобилок
+      borderRadius: '25px', 
+      border: '1px solid #e0f2f1',
+      boxSizing: 'border-box'
+    }}>
+      <h2 style={{ fontWeight: '900', color: '#004d40', fontSize: '24px', textAlign: 'center' }}>
+        {selectedFaculty.name}
+      </h2>
+      
+      <div style={{ 
+        display: 'grid', 
+        // ТЕПЕРЬ: если кнопка меньше 140px, она перескочит на новую строку
+        gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', 
+        gap: '15px', 
+        marginTop: '20px' 
+      }}>
         {[1, 2, 3, 4, 5, 6].map(num => {
-          // ЕСЛИ номер курса 6 И выбран факультет стоматологии (ID 3), то НЕ РИСУЕМ кнопку
           if (num === 6 && selectedFaculty.id === 3) return null;
 
           return (
             <button 
               key={num} 
               onClick={() => { setSelectedCourse(num); loadSubjects(selectedFaculty.id, num); }} 
-              style={{ padding: '30px 20px', borderRadius: '20px', border: '3px solid #b2dfdb', background: '#fff', cursor: 'pointer', fontSize: '24px', fontWeight: '900', color: '#00796b' }}
+              style={{ 
+                padding: '20px 10px', // Сделал кнопку менее высокой
+                borderRadius: '18px', 
+                border: '3px solid #b2dfdb', 
+                background: '#fff', 
+                cursor: 'pointer', 
+                fontSize: '20px', // Чуть уменьшил шрифт
+                fontWeight: '900', 
+                color: '#00796b',
+                transition: '0.2s'
+              }}
             >
               {num} курс
             </button>
