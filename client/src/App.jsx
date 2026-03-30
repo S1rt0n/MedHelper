@@ -113,37 +113,43 @@ function App() {
         {selectedFaculty.name}
       </h2>
       
-      <div style={{ 
-        display: 'grid', 
-        // ТЕПЕРЬ: если кнопка меньше 140px, она перескочит на новую строку
-        gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', 
-        gap: '15px', 
-        marginTop: '20px' 
-      }}>
-        {[1, 2, 3, 4, 5, 6].map(num => {
-          if (num === 6 && selectedFaculty.id === 3) return null;
+     <div style={{ 
+  display: 'grid', 
+  // Фиксируем количество колонок для разных экранов
+  // На мобилках будет 2, на ПК — 3 или 4 в ряд
+  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 250px))', 
+  gap: '20px', 
+  marginTop: '20px',
+  justifyContent: 'center' // Центрируем сетку на странице
+}}>
+  {[1, 2, 3, 4, 5, 6].map(num => {
+    if (num === 6 && selectedFaculty.id === 3) return null;
 
-          return (
-            <button 
-              key={num} 
-              onClick={() => { setSelectedCourse(num); loadSubjects(selectedFaculty.id, num); }} 
-              style={{ 
-                padding: '20px 10px', // Сделал кнопку менее высокой
-                borderRadius: '18px', 
-                border: '3px solid #b2dfdb', 
-                background: '#fff', 
-                cursor: 'pointer', 
-                fontSize: '20px', // Чуть уменьшил шрифт
-                fontWeight: '900', 
-                color: '#00796b',
-                transition: '0.2s'
-              }}
-            >
-              {num} курс
-            </button>
-          );
-        })}
-      </div>
+    return (
+      <button 
+        key={num} 
+        onClick={() => { setSelectedCourse(num); loadSubjects(selectedFaculty.id, num); }} 
+        style={{ 
+          padding: '20px', 
+          borderRadius: '20px', 
+          border: '3px solid #b2dfdb', 
+          background: '#fff', 
+          cursor: 'pointer', 
+          fontSize: '22px', 
+          fontWeight: '900', 
+          color: '#00796b',
+          width: '100%', // Кнопка занимает всю ширину своей ячейки (макс 250px)
+          aspectRatio: '1 / 0.6', // Делает кнопки одинаковыми по пропорциям
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        {num} курс
+      </button>
+    );
+  })}
+</div>
     </div>
   </div>
 )}
